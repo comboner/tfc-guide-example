@@ -1,7 +1,7 @@
 provider "azurerm" {
-  client_id     = $(var.AZURE_ACCESS_KEY_ID)
-  client_secret = $(var.AZURE_ACCESS_SECRET)
-  tenant_id     = $(var.AZURE_TENANT_ID)
+  client_id     = $AZURE_ACCESS_KEY_ID
+  client_secret = $AZURE_ACCESS_SECRET
+  tenant_id     = $AZURE_TENANT_ID
   features {}
 }
 

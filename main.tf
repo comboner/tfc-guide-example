@@ -2,14 +2,14 @@ provider "azurerm" {
   features {}
 }
 
-resource "azurerm_resource_group" "main" {
+resource "azurerm_resource_group" {
   name     = "prefix-resources"
   location = "West Europe"
 }
 
-resource "azurerm_app_service_plan" "main" {
+resource "azurerm_app_service_plan" {
   name                = "prefix-asp"
-  location            = "West Europe
+  location            = "West Europe"
   resource_group_name = "tf_test"
   kind                = "Linux"
   reserved            = true
@@ -20,7 +20,7 @@ resource "azurerm_app_service_plan" "main" {
   }
 }
 
-resource "azurerm_app_service" "main" {
+resource "azurerm_app_service" {
   name                = "prefix-appservice"
   location            = "West Europe"
   resource_group_name = "tf_test"

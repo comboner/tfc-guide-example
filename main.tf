@@ -2,7 +2,7 @@ provider "azurerm" {
   features {}
 }
 
-resource "azurerm_resource_group" {
+resource "azurerm_resource_group" "main" {
   name     = "prefix-resources"
   location = "West Europe"
 }

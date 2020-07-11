@@ -7,7 +7,7 @@ resource "azurerm_resource_group" {
   location = "West Europe"
 }
 
-resource "azurerm_app_service_plan" {
+resource "azurerm_app_service_plan" "main" {
   name                = "prefix-asp"
   location            = "West Europe"
   resource_group_name = "tf_test"
@@ -20,7 +20,7 @@ resource "azurerm_app_service_plan" {
   }
 }
 
-resource "azurerm_app_service" {
+resource "azurerm_app_service" "main" {
   name                = "prefix-appservice"
   location            = "West Europe"
   resource_group_name = "tf_test"

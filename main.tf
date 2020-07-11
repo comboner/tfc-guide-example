@@ -1,28 +1,38 @@
-provider "aws" {
-  version = "2.33.0"
-
-  region = var.aws_region
+provider "azurerm" {
+  features {}
 }
 
-provider "random" {
-  version = "2.2"
+resource "azurerm_resource_group" "main" {
+  name     = "prefix-resources"
+  location = "West Europe"
 }
 
-resource "random_pet" "table_name" {}
+resource "azurerm_app_service_plan" "main" {
+  name                = "prefix-asp"
+  location            = "West Europe
+  resource_group_name = "tf_test"
+  kind                = "Linux"
+  reserved            = true
 
-resource "aws_dynamodb_table" "tfc_example_table" {
-  name = "${var.db_table_name}-${random_pet.table_name.id}"
+  sku {
+    tier = "Free"
+    size = "F1"
+  }
+}
 
-  read_capacity  = var.db_read_capacity
-  write_capacity = var.db_write_capacity
-  hash_key       = "UUID"
+resource "azurerm_app_service" "main" {
+  name                = "prefix-appservice"
+  location            = "West Europe"
+  resource_group_name = "tf_test"
+  app_service_plan_id = "someid"
 
-  attribute {
-    name = "UUID"
-    type = "S"
+  site_config {
+    app_command_line = ""
+    linux_fx_version = "DOCKER|appsvcsample/python-helloworld:latest"
   }
 
-  tags = {
-    user_name = var.tag_user_name
+  app_settings = {
+    "WEBSITES_ENABLE_APP_SERVICE_STORAGE" = "false"
+    "DOCKER_REGISTRY_SERVER_URL"          = "https://index.docker.io"
   }
 }
